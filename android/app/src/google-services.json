@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "1079053488872",
+    "project_id": "flutter-animation-88bd3",
+    "storage_bucket": "flutter-animation-88bd3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1079053488872:android:53f09ac625f998848b2f5d",
+        "android_client_info": {
+          "package_name": "com.nqtruongnk.animation"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1079053488872-l5vclfv4rqqpan0a17jmh26bhr0gu1e1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyADHkhhQaaMnunSYtf2XyqYWOgqbLA18b4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1079053488872-l5vclfv4rqqpan0a17jmh26bhr0gu1e1.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1079053488872-m8e0hpju4pvvg7cc324rnd8b3od5ss66.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.animation"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

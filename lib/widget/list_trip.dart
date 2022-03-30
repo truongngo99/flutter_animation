@@ -1,5 +1,7 @@
 import 'package:animation/model/trip.dart';
 import 'package:animation/screens/detail.dart';
+import 'package:animation/service/firebase_database.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 class ListTrip extends StatefulWidget {
@@ -10,34 +12,16 @@ class ListTrip extends StatefulWidget {
 }
 
 class _ListTripState extends State<ListTrip> {
-  final List<Trip> _list = [];
+  final List<Trips> _list = [];
+  final Stream<QuerySnapshot> _usersStream =
+      FirebaseFirestore.instance.collection('trips').snapshots();
 
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    createListTrip();
-  }
-
-  createListTrip() {
-    List<Trip> _listTrip = [
-      Trip('beach.png', 'Beach Paradise', 399.9, 3),
-      Trip('city.png', 'City Break', 299.9, 5),
-      Trip('space.png', 'Space Blast', 549.9, 2),
-      Trip('ski.png', 'Space Blast', 600.9, 4),
-    ];
-
-    _listTrip.forEach((element) {
-      _list.add(element);
-    });
-  }
-
-  Widget _buildElement(Trip trip) {
+  Widget _buildElement(BuildContext context, Trips trips, String id) {
     return SizedBox(
       height: 100,
       child: InkWell(
-        onTap: () => Navigator.push(context,
-            MaterialPageRoute(builder: (context) => Detail(trip: trip))),
+        onTap: () => Navigator.push(
+            context, MaterialPageRoute(builder: (context) => Detail(id: id))),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -45,10 +29,9 @@ class _ListTripState extends State<ListTrip> {
             ClipRRect(
               borderRadius: const BorderRadius.all(Radius.circular(8)),
               child: Hero(
-                tag: 'dash-${trip.image}',
-                transitionOnUserGestures: true,
+                tag: 'dash-${trips.image}',
                 child: Image.asset(
-                  'assets/images/${trip.image}',
+                  'assets/images/${trips.image}',
                   width: 60,
                   height: 60,
                 ),
@@ -61,7 +44,7 @@ class _ListTripState extends State<ListTrip> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    '${trip.numNight} nights',
+                    '${trips.nights} nights',
                     style: const TextStyle(
                         color: Color.fromARGB(255, 89, 179, 253),
                         fontWeight: FontWeight.w600),
@@ -70,7 +53,7 @@ class _ListTripState extends State<ListTrip> {
                     height: 2,
                   ),
                   Text(
-                    trip.title,
+                    trips.name,
                     style: const TextStyle(
                         fontSize: 18,
                         color: Color.fromARGB(255, 133, 131, 131),
@@ -80,7 +63,7 @@ class _ListTripState extends State<ListTrip> {
               ),
             ),
             const Spacer(),
-            Text("\$${trip.price}"),
+            Text("\$${trips.price}"),
           ],
         ),
       ),
@@ -89,11 +72,24 @@ class _ListTripState extends State<ListTrip> {
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-        shrinkWrap: true,
-        itemCount: _list.length,
-        itemBuilder: (context, index) {
-          return _buildElement(_list[index]);
+    return StreamBuilder<QuerySnapshot>(
+        stream: _usersStream,
+        builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
+          if (!snapshot.hasData) {
+            return Text('Loading...');
+          }
+          snapshot.data!.docs.forEach((element) {
+            Trips trips =
+                Trips.fromJson(element.data() as Map<String, dynamic>);
+            _list.add(trips);
+          });
+          return ListView.builder(
+              shrinkWrap: true,
+              itemCount: _list.length,
+              itemBuilder: (context, index) {
+                return _buildElement(
+                    context, _list[index], snapshot.data!.docs[index].id);
+              });
         });
   }
 }

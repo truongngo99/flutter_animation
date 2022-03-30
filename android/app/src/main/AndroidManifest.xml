@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.animation">
+    package="com.nqtruongnk.animation">
    <application
         android:label="animation"
         android:name="${applicationName}"
