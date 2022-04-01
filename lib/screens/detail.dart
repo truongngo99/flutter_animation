@@ -55,7 +55,7 @@ class _DetailState extends State<Detail> with TickerProviderStateMixin {
               if (!snapshot.hasData) return const CircularProgressIndicator();
               Trips trips =
                   Trips.fromJson(snapshot.data!.data() as Map<String, dynamic>);
-              print(trips.image);
+              print(trips);
               return Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [

@@ -5,6 +5,7 @@ part 'trip.g.dart';
 @freezed
 class Trips with _$Trips {
   const factory Trips({
+    String? id,
     required String name,
     required double price,
     required int nights,

@@ -43,5 +43,11 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Privacy - Photo Library Usage </string>
+	<key>NSCameraUsageDescription</key>
+	<string>Privacy - Camera Usage </string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>Privacy - Microphone Usage </string>
 </dict>
 </plist>

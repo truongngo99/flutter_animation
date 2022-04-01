@@ -1,18 +1,26 @@
-// import 'dart:convert';
+import 'dart:math';
 
-// import 'package:animation/model/trip.dart';
-// import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:animation/model/trip.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
-// class Database {
-//   FirebaseFirestore firestore = FirebaseFirestore.instance;
+class Database {
+  static FirebaseFirestore firestore = FirebaseFirestore.instance;
+  static CollectionReference users =
+      FirebaseFirestore.instance.collection('trips');
 
-//   Future<List<Trips>> getData() async {
-//     // List<Trips> trips = [];
-//     var data =
-//         firestore.collection('trips').withConverter<Trips>(fromFirestore: (snapshot,_)=> Trips.fromJson(snapshot.data()!), toFirestore: (trips,_)=> trips.toJson());
-//     // data.docs.forEach((element) {
-//     //   trips.add(Trips.fromJson(jsonDecode(element.data().toString())));
-//     // });
-//     // return trips;
-//   }
-// }
+  static Stream<List<Trips>> getData() {
+    return firestore.collection('trips').snapshots().map((event) {
+      return event.docs.map((e) {
+        final json = e.data();
+        json.addAll({
+          "id": e.id,
+        });
+        return Trips.fromJson(json);
+      }).toList();
+    });
+  }
+
+  static addTrips(Trips trips) async {
+    await users.add(trips.toJson());
+  }
+}

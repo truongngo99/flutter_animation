@@ -23,12 +23,14 @@ class _$TripsTearOff {
   const _$TripsTearOff();
 
   _Trips call(
-      {required String name,
+      {String? id,
+      required String name,
       required double price,
       required int nights,
       required String image,
       required String description}) {
     return _Trips(
+      id: id,
       name: name,
       price: price,
       nights: nights,
@@ -47,6 +49,7 @@ const $Trips = _$TripsTearOff();
 
 /// @nodoc
 mixin _$Trips {
+  String? get id => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
   double get price => throw _privateConstructorUsedError;
   int get nights => throw _privateConstructorUsedError;
@@ -63,7 +66,8 @@ abstract class $TripsCopyWith<$Res> {
   factory $TripsCopyWith(Trips value, $Res Function(Trips) then) =
       _$TripsCopyWithImpl<$Res>;
   $Res call(
-      {String name,
+      {String? id,
+      String name,
       double price,
       int nights,
       String image,
@@ -80,6 +84,7 @@ class _$TripsCopyWithImpl<$Res> implements $TripsCopyWith<$Res> {
 
   @override
   $Res call({
+    Object? id = freezed,
     Object? name = freezed,
     Object? price = freezed,
     Object? nights = freezed,
@@ -87,6 +92,10 @@ class _$TripsCopyWithImpl<$Res> implements $TripsCopyWith<$Res> {
     Object? description = freezed,
   }) {
     return _then(_value.copyWith(
+      id: id == freezed
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String?,
       name: name == freezed
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -117,7 +126,8 @@ abstract class _$TripsCopyWith<$Res> implements $TripsCopyWith<$Res> {
       __$TripsCopyWithImpl<$Res>;
   @override
   $Res call(
-      {String name,
+      {String? id,
+      String name,
       double price,
       int nights,
       String image,
@@ -135,6 +145,7 @@ class __$TripsCopyWithImpl<$Res> extends _$TripsCopyWithImpl<$Res>
 
   @override
   $Res call({
+    Object? id = freezed,
     Object? name = freezed,
     Object? price = freezed,
     Object? nights = freezed,
@@ -142,6 +153,10 @@ class __$TripsCopyWithImpl<$Res> extends _$TripsCopyWithImpl<$Res>
     Object? description = freezed,
   }) {
     return _then(_Trips(
+      id: id == freezed
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String?,
       name: name == freezed
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -170,7 +185,8 @@ class __$TripsCopyWithImpl<$Res> extends _$TripsCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_Trips implements _Trips {
   const _$_Trips(
-      {required this.name,
+      {this.id,
+      required this.name,
       required this.price,
       required this.nights,
       required this.image,
@@ -179,6 +195,8 @@ class _$_Trips implements _Trips {
   factory _$_Trips.fromJson(Map<String, dynamic> json) =>
       _$$_TripsFromJson(json);
 
+  @override
+  final String? id;
   @override
   final String name;
   @override
@@ -192,7 +210,7 @@ class _$_Trips implements _Trips {
 
   @override
   String toString() {
-    return 'Trips(name: $name, price: $price, nights: $nights, image: $image, description: $description)';
+    return 'Trips(id: $id, name: $name, price: $price, nights: $nights, image: $image, description: $description)';
   }
 
   @override
@@ -200,6 +218,7 @@ class _$_Trips implements _Trips {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _Trips &&
+            const DeepCollectionEquality().equals(other.id, id) &&
             const DeepCollectionEquality().equals(other.name, name) &&
             const DeepCollectionEquality().equals(other.price, price) &&
             const DeepCollectionEquality().equals(other.nights, nights) &&
@@ -211,6 +230,7 @@ class _$_Trips implements _Trips {
   @override
   int get hashCode => Object.hash(
       runtimeType,
+      const DeepCollectionEquality().hash(id),
       const DeepCollectionEquality().hash(name),
       const DeepCollectionEquality().hash(price),
       const DeepCollectionEquality().hash(nights),
@@ -230,7 +250,8 @@ class _$_Trips implements _Trips {
 
 abstract class _Trips implements Trips {
   const factory _Trips(
-      {required String name,
+      {String? id,
+      required String name,
       required double price,
       required int nights,
       required String image,
@@ -238,6 +259,8 @@ abstract class _Trips implements Trips {
 
   factory _Trips.fromJson(Map<String, dynamic> json) = _$_Trips.fromJson;
 
+  @override
+  String? get id;
   @override
   String get name;
   @override

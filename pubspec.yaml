@@ -39,6 +39,8 @@ dependencies:
   cloud_firestore: ^3.1.10
   freezed_annotation: ^1.1.0
   json_annotation: ^4.4.0
+  image_picker: ^0.8.4+11
+  firebase_storage: ^10.2.9
 
 dev_dependencies:
   flutter_test:

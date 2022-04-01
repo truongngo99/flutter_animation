@@ -12,16 +12,17 @@ class ListTrip extends StatefulWidget {
 }
 
 class _ListTripState extends State<ListTrip> {
-  final List<Trips> _list = [];
-  final Stream<QuerySnapshot> _usersStream =
-      FirebaseFirestore.instance.collection('trips').snapshots();
-
-  Widget _buildElement(BuildContext context, Trips trips, String id) {
+  Widget _buildElement(
+    BuildContext context,
+    Trips trips,
+  ) {
     return SizedBox(
       height: 100,
       child: InkWell(
         onTap: () => Navigator.push(
-            context, MaterialPageRoute(builder: (context) => Detail(id: id))),
+            context,
+            MaterialPageRoute(
+                builder: (context) => Detail(id: trips.id ?? ''))),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -72,24 +73,21 @@ class _ListTripState extends State<ListTrip> {
 
   @override
   Widget build(BuildContext context) {
-    return StreamBuilder<QuerySnapshot>(
-        stream: _usersStream,
-        builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
+    return StreamBuilder<List<Trips>>(
+        stream: Database.getData(),
+        builder: (context, snapshot) {
           if (!snapshot.hasData) {
-            return Text('Loading...');
+            return const CircularProgressIndicator();
           }
-          snapshot.data!.docs.forEach((element) {
-            Trips trips =
-                Trips.fromJson(element.data() as Map<String, dynamic>);
-            _list.add(trips);
-          });
-          return ListView.builder(
-              shrinkWrap: true,
-              itemCount: _list.length,
-              itemBuilder: (context, index) {
-                return _buildElement(
-                    context, _list[index], snapshot.data!.docs[index].id);
-              });
+          if (snapshot.hasData) {
+            return ListView.builder(
+                shrinkWrap: true,
+                itemCount: snapshot.data!.length,
+                itemBuilder: (context, index) {
+                  return _buildElement(context, snapshot.data![index]);
+                });
+          }
+          return const CircularProgressIndicator();
         });
   }
 }
