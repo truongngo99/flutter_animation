@@ -27,7 +27,7 @@ class _$TripsTearOff {
       required String name,
       required double price,
       required int nights,
-      required String image,
+      String? image,
       required String description}) {
     return _Trips(
       id: id,
@@ -53,7 +53,7 @@ mixin _$Trips {
   String get name => throw _privateConstructorUsedError;
   double get price => throw _privateConstructorUsedError;
   int get nights => throw _privateConstructorUsedError;
-  String get image => throw _privateConstructorUsedError;
+  String? get image => throw _privateConstructorUsedError;
   String get description => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -70,7 +70,7 @@ abstract class $TripsCopyWith<$Res> {
       String name,
       double price,
       int nights,
-      String image,
+      String? image,
       String description});
 }
 
@@ -111,7 +111,7 @@ class _$TripsCopyWithImpl<$Res> implements $TripsCopyWith<$Res> {
       image: image == freezed
           ? _value.image
           : image // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       description: description == freezed
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
@@ -130,7 +130,7 @@ abstract class _$TripsCopyWith<$Res> implements $TripsCopyWith<$Res> {
       String name,
       double price,
       int nights,
-      String image,
+      String? image,
       String description});
 }
 
@@ -172,7 +172,7 @@ class __$TripsCopyWithImpl<$Res> extends _$TripsCopyWithImpl<$Res>
       image: image == freezed
           ? _value.image
           : image // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       description: description == freezed
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
@@ -189,7 +189,7 @@ class _$_Trips implements _Trips {
       required this.name,
       required this.price,
       required this.nights,
-      required this.image,
+      this.image,
       required this.description});
 
   factory _$_Trips.fromJson(Map<String, dynamic> json) =>
@@ -204,7 +204,7 @@ class _$_Trips implements _Trips {
   @override
   final int nights;
   @override
-  final String image;
+  final String? image;
   @override
   final String description;
 
@@ -254,7 +254,7 @@ abstract class _Trips implements Trips {
       required String name,
       required double price,
       required int nights,
-      required String image,
+      String? image,
       required String description}) = _$_Trips;
 
   factory _Trips.fromJson(Map<String, dynamic> json) = _$_Trips.fromJson;
@@ -268,7 +268,7 @@ abstract class _Trips implements Trips {
   @override
   int get nights;
   @override
-  String get image;
+  String? get image;
   @override
   String get description;
   @override

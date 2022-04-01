@@ -9,7 +9,7 @@ class Trips with _$Trips {
     required String name,
     required double price,
     required int nights,
-    required String image,
+    String? image,
     required String description,
   }) = _Trips;
   factory Trips.fromJson(Map<String, dynamic> json) => _$TripsFromJson(json);

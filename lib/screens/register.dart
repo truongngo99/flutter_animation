@@ -12,8 +12,11 @@ class Register extends StatefulWidget {
 }
 
 class _RegisterState extends State<Register> {
-  TextEditingController usernameCtrl = TextEditingController();
+  TextEditingController firstNameCtrl = TextEditingController();
   TextEditingController passwordCtrl = TextEditingController();
+  TextEditingController lastNameCtrl = TextEditingController();
+  TextEditingController emailCtrl = TextEditingController();
+
   final isLoading = ValueNotifier(false);
   @override
   Widget build(BuildContext context) {
@@ -44,8 +47,30 @@ class _RegisterState extends State<Register> {
               padding: const EdgeInsets.only(left: 32.0, right: 32),
               child: EditText(
                 suffixIcon: false,
-                textEditingController: usernameCtrl,
-                hintText: 'Username',
+                textEditingController: firstNameCtrl,
+                hintText: 'First Name',
+              ),
+            ),
+            SizedBox(
+              height: size.height * 0.03,
+            ),
+            Padding(
+              padding: const EdgeInsets.only(left: 32.0, right: 32),
+              child: EditText(
+                suffixIcon: false,
+                textEditingController: lastNameCtrl,
+                hintText: 'Last Name',
+              ),
+            ),
+            SizedBox(
+              height: size.height * 0.03,
+            ),
+            Padding(
+              padding: const EdgeInsets.only(left: 32.0, right: 32),
+              child: EditText(
+                suffixIcon: false,
+                textEditingController: emailCtrl,
+                hintText: 'Email',
               ),
             ),
             SizedBox(
@@ -89,10 +114,13 @@ class _RegisterState extends State<Register> {
                               isLoading.value = true;
 
                               bool success = await FirebaseService().register(
-                                  usernameCtrl.text, passwordCtrl.text);
+                                  emailCtrl.text,
+                                  passwordCtrl.text,
+                                  firstNameCtrl.text,
+                                  lastNameCtrl.text);
                               if (success) {
                                 Navigator.pop(context, {
-                                  'username': usernameCtrl.text,
+                                  'username': emailCtrl.text,
                                   'password': passwordCtrl.text,
                                 });
                               } else {

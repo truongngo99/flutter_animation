@@ -31,8 +31,8 @@ class _ListTripState extends State<ListTrip> {
               borderRadius: const BorderRadius.all(Radius.circular(8)),
               child: Hero(
                 tag: 'dash-${trips.image}',
-                child: Image.asset(
-                  'assets/images/${trips.image}',
+                child: Image.network(
+                  '${trips.image}',
                   width: 60,
                   height: 60,
                 ),
@@ -80,6 +80,7 @@ class _ListTripState extends State<ListTrip> {
             return const CircularProgressIndicator();
           }
           if (snapshot.hasData) {
+            print(snapshot.data);
             return ListView.builder(
                 shrinkWrap: true,
                 itemCount: snapshot.data!.length,

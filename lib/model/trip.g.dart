@@ -11,7 +11,7 @@ _$_Trips _$$_TripsFromJson(Map<String, dynamic> json) => _$_Trips(
       name: json['name'] as String,
       price: (json['price'] as num).toDouble(),
       nights: json['nights'] as int,
-      image: json['image'] as String,
+      image: json['image'] as String?,
       description: json['description'] as String,
     );
 
